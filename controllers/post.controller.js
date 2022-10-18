@@ -59,9 +59,11 @@ module.exports.createPost = async (req, res) => {
   }
 };
 
+
 module.exports.updatePost = (req, res) => {
-  if (!ObjectID.isValid(req.params.id),
-   post.userId != req.auth.userId && requestingUser.admin !== true)
+  
+  if (!ObjectID.isValid(req.params.id))
+   
     
     return res.status(400).send("ID unknown : " + req.params.id);
 
