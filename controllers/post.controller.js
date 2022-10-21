@@ -62,10 +62,11 @@ module.exports.createPost = async (req, res) => {
 
 module.exports.updatePost = (req, res) => {
   
+  if (req.body.post.posterId !== req.body.userData._id && req.body.userData.admin === false) {
+    return res.status(400).send("User is not admin : " );
+  }
   if (!ObjectID.isValid(req.params.id))
-   
-    
-    return res.status(400).send("ID unknown : " + req.params.id);
+   return res.status(400).send("ID unknown : " + req.params.id);
 
   const updatedRecord = {
     message: req.body.message,
@@ -83,6 +84,9 @@ module.exports.updatePost = (req, res) => {
 };
 
 module.exports.deletePost = (req, res) => {
+  if (req.body.post.posterId !== req.body.userData._id && req.body.userData.admin === false) {
+    return res.status(400).send("User is not admin : " );
+  } 
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
 
@@ -93,14 +97,14 @@ module.exports.deletePost = (req, res) => {
 };
 
 module.exports.likePost = async (req, res) => {
-  if (!ObjectID.isValid(req.params.id))
+  if (!ObjectID.isValid(req.params.id))  // On controle si l'ID est correct
     return res.status(400).send("ID unknown : " + req.params.id);
 
   try {
-    await PostModel.findByIdAndUpdate(
+    await PostModel.findByIdAndUpdate(   
       req.params.id,
       {
-        $addToSet: { likers: req.body.id },
+        $addToSet: { likers: req.body.id },   /* On prend le tableau likers et on ajoute une donnée en plus  */ 
       },
       { new: true })
       .then((data) => res.send(data))
@@ -114,14 +118,14 @@ module.exports.likePost = async (req, res) => {
 };
 
 module.exports.unlikePost = async (req, res) => {
-  if (!ObjectID.isValid(req.params.id))
+  if (!ObjectID.isValid(req.params.id))    // On controle si l'ID est correct
     return res.status(400).send("ID unknown : " + req.params.id);
 
   try {
     await PostModel.findByIdAndUpdate(
       req.params.id,
       {
-        $pull: { likers: req.body.id },
+        $pull: { likers: req.body.id },   /* On prend le tableau likers et on enleve une donnée en plus  */ 
       },
       { new: true })
             .then((data) => res.send(data))

@@ -68,6 +68,7 @@ export const unlikePost = (postId, userId) => {
       url: `${process.env.REACT_APP_API_URL}api/post/unlike-post/` + postId,
       data: { id: userId },
     })
+
       .then((res) => {
         dispatch({ type: UNLIKE_POST, payload: { postId, userId } });
       })
@@ -75,12 +76,15 @@ export const unlikePost = (postId, userId) => {
   };
 };
 
-export const updatePost = (postId, message) => {
+export const updatePost = (post, message, userData) => {
+  let postId = post._id
+
   return (dispatch) => {
     return axios({
       method: "put",
-      url: `${process.env.REACT_APP_API_URL}api/post/${postId}`,
-      data: { message },
+      
+      url: `${process.env.REACT_APP_API_URL}api/post/${post._id}`,
+      data: { message,post, userData },
     })
       .then((res) => {
         dispatch({ type: UPDATE_POST, payload: { message, postId } });
@@ -89,11 +93,13 @@ export const updatePost = (postId, message) => {
   };
 };
 
-export const deletePost = (postId) => {
+export const deletePost = (post, userData) => {
+  let postId = post._id
   return (dispatch) => {
     return axios({
       method: "delete",
-      url: `${process.env.REACT_APP_API_URL}api/post/${postId}`,
+      url: `${process.env.REACT_APP_API_URL}api/post/${post._id}`,
+      data: { post, userData },
     })
       .then((res) => {
         dispatch({ type: DELETE_POST, payload: { postId } });

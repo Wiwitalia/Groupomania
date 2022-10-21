@@ -17,8 +17,9 @@ const Card = ({ post }) => {
   const dispatch = useDispatch();
   
   const updateItem = () => {
+    console.log(post)
     if (textUpdate) {
-      dispatch(updatePost(post._id, textUpdate));
+      dispatch(updatePost(post, textUpdate, userData ));
     }
     setIsUpdated(false);
   };
@@ -98,7 +99,7 @@ const Card = ({ post }) => {
                 <div onClick={() => setIsUpdated(!isUpdated)}>
                   <img src="./img/icons/edit.svg" alt="edit" />
                 </div>
-                <DeleteCard id={post._id} />
+                <DeleteCard post={post} userData={userData} />
               </div>
             )}
             <div className="card-footer">
