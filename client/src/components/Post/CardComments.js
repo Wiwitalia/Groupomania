@@ -66,7 +66,7 @@ const CardComments = ({ post }) => {
           </div>
         );
       })}
-      {userData._id && (
+      {userData._id && ( // Si jamais l'utilisateur est connecté alors tu lance la fonction handleComment( Possibilitée de laisser un commentaire)
         <form action="" onSubmit={handleComment} className="comment-form">
           <input
             type="text"

@@ -12,30 +12,30 @@ const initialState = {};
 
 export default function postReducer(state = initialState, action) {
   switch (action.type) {
-    case GET_POSTS:
-      return action.payload;
+    case GET_POSTS: // Si jamais l'action c'est get posts
+      return action.payload; // Alors le store return action.paiload(le res.data)
     case LIKE_POST:
-      return state.map((post) => {
+      return state.map((post) => { // Avec ce map on va identifier le post en question
         if (post._id === action.payload.postId) {
           return {
             ...post,
-            likers: [action.payload.userId, ...post.likers],
+            likers: [action.payload.userId, ...post.likers], // On rajoute l'userID dans le tableau likers, et on met a la suite les likers deja present
           };
         }
-        return post;
+        return post; // Si le if precedent n'est pas bon alors return ce qui a deja été traité
       });
     case UNLIKE_POST:
       return state.map((post) => {
         if (post._id === action.payload.postId) {
           return {
             ...post,
-            likers: post.likers.filter((id) => id !== action.payload.userId),
+            likers: post.likers.filter((id) => id !== action.payload.userId),  // On retire l'id du tableau likers
           };
         }
         return post;
       });
     case UPDATE_POST:
-      return state.map((post) => {
+      return state.map((post) => { // On va chercher le post en question
         if (post._id === action.payload.postId) {
           return {
             ...post,

@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 
+
+
+// Shema de nos post
 const PostSchema = new mongoose.Schema(
   {
     posterId: {

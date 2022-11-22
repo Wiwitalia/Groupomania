@@ -4,12 +4,12 @@ import { UidContext } from "../components/AppContext";
 import UpdateProfil from "../components/Profil/UpdateProfil";
 
 const Profil = () => {
-  const uid = useContext(UidContext);
+  const uid = useContext(UidContext);  // uid aura l'id de l'utilisateur connecté
 
   return (
     <div className="profil-page">
-      {uid ? (
-        <UpdateProfil />
+      {uid ? (  // Si uid est true
+        <UpdateProfil /> // On va dans updateProfil
       ) : (
         <div className="log-container">
           <Log signin={false} signup={true} />

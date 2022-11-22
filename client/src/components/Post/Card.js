@@ -12,20 +12,20 @@ const Card = ({ post }) => {
   const [isUpdated, setIsUpdated] = useState(false);
   const [textUpdate, setTextUpdate] = useState(null);
   const [showComments, setShowComments] = useState(false);
-  const usersData = useSelector((state) => state.usersReducer);
-  const userData = useSelector((state) => state.userReducer);
+  const usersData = useSelector((state) => state.usersReducer); // Toutes nos data utilisateurs
+  const userData = useSelector((state) => state.userReducer); // Toutes nos data utilisateur
   const dispatch = useDispatch();
   
   const updateItem = () => {
     console.log(post)
-    if (textUpdate) {
-      dispatch(updatePost(post, textUpdate, userData ));
+    if (textUpdate) { // Si jamais le post a été modifier
+      dispatch(updatePost(post, textUpdate, userData )); // Alors tu me dispatch le post, la modif et les données utilisateur
     }
     setIsUpdated(false);
   };
 
   useEffect(() => {
-    !isEmpty(usersData[0]) && setIsLoading(false);
+    !isEmpty(usersData[0]) && setIsLoading(false); // Si userData n'est pas empty alors setIsLoading passe en false
   }, [usersData]);
 
   return (
@@ -37,10 +37,10 @@ const Card = ({ post }) => {
           <div className="card-left">
             <img
               src={
-                !isEmpty(usersData[0]) &&
+                !isEmpty(usersData[0]) && // Si jamais isempty de userdata au niveau 0 n'est pas vide
                 usersData
-                  .map((user) => {
-                    if (user._id === post.posterId) return user.picture;
+                  .map((user) => { // On map toutes les données utilisateur pour trouver la photo de l'utilisateur
+                    if (user._id === post.posterId) return user.picture; // Si l'userId correspond au poster.id alors tu return le chemin vers ca photo
                     else return null;
                   })
                   .join("")
@@ -60,7 +60,7 @@ const Card = ({ post }) => {
                       })
                       .join("")}
                 </h3>
-                {post.posterId !== userData._id && (
+                {post.posterId !== userData._id && ( // Si jamais posterId n'est pas egal a userData alors tu peux afficher la suite
                   <FollowHandler idToFollow={post.posterId} type={"card"} />
                 )}
               </div>
@@ -70,8 +70,8 @@ const Card = ({ post }) => {
             {isUpdated && (
               <div className="update-post">
                 <textarea
-                  defaultValue={post.message}
-                  onChange={(e) => setTextUpdate(e.target.value)}
+                  defaultValue={post.message} // Au click on retrouve le message initial
+                  onChange={(e) => setTextUpdate(e.target.value)} // Modification du message
                 />
                 <div className="button-container">
                   <button className="btn" onClick={updateItem}>
@@ -80,10 +80,10 @@ const Card = ({ post }) => {
                 </div>
               </div>
             )}
-            {post.picture && (
+            {post.picture && ( // Si post.picture existe alors tu m'affiche le chemin de la photo
               <img src={post.picture} alt="card-pic" className="card-pic" />
             )}
-            {post.video && (
+            {post.video && ( // Si post.picture existe alors tu m'affiche le chemin de la video
               <iframe
                 width="500"
                 height="300"
@@ -105,7 +105,7 @@ const Card = ({ post }) => {
             <div className="card-footer">
               <div className="comment-icon">
                 <img
-                  onClick={() => setShowComments(!showComments)}
+                  onClick={() => setShowComments(!showComments)} // Au click montre les commentaires, au reclic cache les commentaires
                   src="./img/icons/message1.svg"
                   alt="comment"
                 />

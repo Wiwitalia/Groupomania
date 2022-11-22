@@ -4,7 +4,7 @@ import App from "./App";
 import "./styles/index.scss";
 import { Provider } from "react-redux";
 import { applyMiddleware, createStore } from "redux";
-import thunk from "redux-thunk";
+import thunk from "redux-thunk"; // Middleware qui permet de faire des requetes asyncrone avec redux
 import rootReducer from "./reducers";
 import { BrowserRouter } from 'react-router-dom';
 import { getUsers } from "./actions/users.actions";
@@ -12,9 +12,9 @@ import { getUsers } from "./actions/users.actions";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { getPosts } from "./actions/post.actions";
 
-const store = createStore(
+const store = createStore(  // On crée notre store
   rootReducer,
-  composeWithDevTools(applyMiddleware(thunk))
+  composeWithDevTools(applyMiddleware(thunk)) 
 );
 
 store.dispatch(getUsers());

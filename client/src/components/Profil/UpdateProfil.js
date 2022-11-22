@@ -16,9 +16,9 @@ const UpdateProfil = () => {
   const [followingPopup, setFollowingPopup] = useState(false);
   const [followersPopup, setFollowersPopup] = useState(false);
 
-  const handleUpdate = () => {
-    dispatch(updateBio(userData._id, bio));
-    setUpdateForm(false);
+  const handleUpdate = () => { // Mise a jour de la bio
+    dispatch(updateBio(userData._id, bio)); // On declanche la fonction updateBio et on lui passe les parametres ( l'id de notre utilisateur et la bio)
+    setUpdateForm(false); // On cache le formulaire
   };
 
   return (
@@ -36,7 +36,7 @@ const UpdateProfil = () => {
         <div className="right-part">
           <div className="bio-update">
             <h3>Bio</h3>
-            {updateForm === false && (
+            {updateForm === false && ( // Si updateForm est sur false et qu'on click dessus on le passe a true
               <>
                 <p onClick={() => setUpdateForm(!updateForm)}>{userData.bio}</p>
                 <button onClick={() => setUpdateForm(!updateForm)}>
@@ -44,7 +44,7 @@ const UpdateProfil = () => {
                 </button>
               </>
             )}
-            {updateForm && (
+            {updateForm && ( 
               <>
                 <textarea
                   type="text"

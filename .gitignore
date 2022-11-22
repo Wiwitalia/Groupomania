@@ -1,2 +1,4 @@
 /node_modules
 /config/.env
+
+/Ces infos ne transiteront jamais sur GitHub

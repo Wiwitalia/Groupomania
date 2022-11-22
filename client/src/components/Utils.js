@@ -1,4 +1,4 @@
-export const dateParser = (num) => {
+export const dateParser = (num) => { // Fonction qui permet de traiter les dates
   let options = {
     hour: "2-digit",
     minute: "2-digit",

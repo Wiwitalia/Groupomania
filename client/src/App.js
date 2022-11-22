@@ -9,21 +9,23 @@ const App = () => {
   const [uid, setUid] = useState(null);
   const dispatch = useDispatch();
 
-  useEffect(() => {
+
+// Controle du token de l'utilisateur
+  useEffect(() => {  // A chaques fois qu'on relancera useEffect, tu me lance la fonction asyncrone fetchToken
     const fetchToken = async () => {
       await axios({
         method: "get",
         url: `${process.env.REACT_APP_API_URL}jwtid`,
         withCredentials: true,
       })
-        .then((res) => {
-          setUid(res.data);
+        .then((res) => { // Si l'id est renvoyé
+          setUid(res.data); 
         })
-        .catch((err) => console.log("No token"));
+        .catch((err) => console.log("No token")); // Sinon no token
     };
     fetchToken();
 
-    if (uid) dispatch(getUser(uid));
+    if (uid) dispatch(getUser(uid)); // Si jamais uid existe, on modifie les valeurs de uid
   }, [uid, dispatch]);
 
   return (

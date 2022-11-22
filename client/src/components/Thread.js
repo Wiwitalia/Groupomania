@@ -5,10 +5,10 @@ import Card from "./Post/Card";
 import { isEmpty } from "./Utils";
 
 const Thread = () => {
-  const [loadPost, setLoadPost] = useState(true);
+  const [loadPost, setLoadPost] = useState(true); // Pour charger une fois les posts
   const [count, setCount] = useState(5);
-  const dispatch = useDispatch();
-  const posts = useSelector((state) => state.postReducer);
+  const dispatch = useDispatch(); // On lance l'action
+  const posts = useSelector((state) => state.postReducer); // On recupere le state.postReducer
 
   const loadMore = () => {
     if (window.innerHeight + document.documentElement.scrollTop + 1 > document.scrollingElement.scrollHeight) {
@@ -17,7 +17,7 @@ const Thread = () => {
   }
 
   useEffect(() => {
-    if (loadPost) {
+    if (loadPost) { 
       dispatch(getPosts(count));
       setLoadPost(false);
       setCount(count + 5);
@@ -30,7 +30,7 @@ const Thread = () => {
   return (
     <div className="thread-container">
       <ul>
-        {!isEmpty(posts[0]) &&
+        {!isEmpty(posts[0]) && // Si posts est true alors affiche les posts
           posts.map((post) => {
             return <Card post={post} key={post._id} />;
           })}

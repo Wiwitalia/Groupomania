@@ -14,13 +14,13 @@ export default function userReducer(state = initialState, action) {
       return action.payload;
     case UPLOAD_PICTURE:
       return {
-        ...state,
-        picture: action.payload,
+        ...state, // Pour ne pas ecraser les données, on les recupères
+        picture: action.payload, // On met a jour la photo
       };
     case UPDATE_BIO:
       return {
         ...state,
-        bio: action.payload,
+        bio: action.payload, // On met a jours les données dans la bio
       };
     case FOLLOW_USER:
       return {

@@ -5,10 +5,10 @@ import { UidContext } from "./AppContext";
 import Logout from "./Log/Logout";
 
 const Navbar = () => {
-  const uid = useContext(UidContext);
-  const userData = useSelector((state) => state.userReducer);
+  const uid = useContext(UidContext); // On recupere ce qui est stocker dans le uidContext
+  const userData = useSelector((state) => state.userReducer); // En disant ca notre component sait qu'il doit aller dans le userReducer
 
-  return (
+  return ( // Ligne 27 on ajoute le nom de l'utilisateur a coté de Bienvenue
     <nav>
       <div className="nav-container">
         <div className="logo">

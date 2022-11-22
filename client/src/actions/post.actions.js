@@ -20,13 +20,14 @@ export const GET_TRENDS = "GET_TRENDS";
 // errors
 export const GET_POST_ERRORS = "GET_POST_ERRORS";
 
+//Recuperation de tous les posts
 export const getPosts = (num) => {
-  return (dispatch) => {
+  return (dispatch) => { // On declanche l'action pour aller chercher notre data
     return axios
-      .get(`${process.env.REACT_APP_API_URL}api/post/`)
+      .get(`${process.env.REACT_APP_API_URL}api/post/`) // Pour aller chercher tous les posts
       .then((res) => {
         const array = res.data.slice(0, num);
-        dispatch({ type: GET_POSTS, payload: array });
+        dispatch({ type: GET_POSTS, payload: array }); // On dispatch le resultat dan le store
         dispatch({ type: GET_ALL_POSTS, payload: res.data });
       })
       .catch((err) => console.log(err));
@@ -47,15 +48,15 @@ export const addPost = (data) => {
   };
 };
 
-export const likePost = (postId, userId) => {
+export const likePost = (postId, userId) => { // On passe en parametre le postid et userid
   return (dispatch) => {
-    return axios({
-      method: "patch",
+    return axios({ // On appel axios
+      method: "patch", // On fait une methode patch
       url: `${process.env.REACT_APP_API_URL}api/post/like-post/` + postId,
       data: { id: userId },
     })
       .then((res) => {
-        dispatch({ type: LIKE_POST, payload: { postId, userId } });
+        dispatch({ type: LIKE_POST, payload: { postId, userId } }); // On dipatch le like post et les infos a traiter ( postId et userId)
       })
       .catch((err) => console.log(err));
   };
@@ -75,14 +76,13 @@ export const unlikePost = (postId, userId) => {
       .catch((err) => console.log(err));
   };
 };
-
+ //Mise a jour d'un post
 export const updatePost = (post, message, userData) => {
   let postId = post._id
 
   return (dispatch) => {
     return axios({
       method: "put",
-      
       url: `${process.env.REACT_APP_API_URL}api/post/${post._id}`,
       data: { message,post, userData },
     })
@@ -93,12 +93,13 @@ export const updatePost = (post, message, userData) => {
   };
 };
 
+//Supression d'un post
 export const deletePost = (post, userData) => {
   let postId = post._id
   return (dispatch) => {
     return axios({
       method: "delete",
-      url: `${process.env.REACT_APP_API_URL}api/post/${post._id}`,
+      url: `${process.env.REACT_APP_API_URL}api/post/${post._id}`, // On supprime le post coté bdd
       data: { post, userData },
     })
       .then((res) => {

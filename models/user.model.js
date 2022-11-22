@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
-const { isEmail } = require('validator');
+const { isEmail } = require('validator'); // On appel dans la biblioteque validator la fonction isEmail
 const bcrypt = require('bcrypt');
 
+
+// Shema de notre utilisateur
 const userSchema = new mongoose.Schema(
   { admin: {
       type: Boolean,
@@ -14,13 +16,13 @@ const userSchema = new mongoose.Schema(
       minLength: 3,
       maxLength: 55,
       unique: true,
-      trim: true
+      trim: true   // suppression des éspaces
     },
     email: {
       type: String,
       required: true,
-      validate: [isEmail],
-      lowercase: true,
+      validate: [isEmail], // Validation du mail
+      lowercase: true, // Minuscules
       unique: true,
       trim: true,
     },
@@ -49,7 +51,7 @@ const userSchema = new mongoose.Schema(
     }
   },
   {
-    timestamps: true,
+    timestamps: true,  // Date de creation de l'utilisateur
   }
 );
 
@@ -72,6 +74,6 @@ userSchema.statics.login = async function(email, password) {
   throw Error('email incorrect')
 };
 
-const UserModel = mongoose.model("user", userSchema);
+const UserModel = mongoose.model("user", userSchema);  // On recupere le userShema, on incremente dans la table user dans la BDD
 
 module.exports = UserModel;

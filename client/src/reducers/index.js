@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux';  // On combine tous les reducers
 import userReducer from './user.reducer';
 import usersReducer from './users.reducer';
 import postReducer from './post.reducer';

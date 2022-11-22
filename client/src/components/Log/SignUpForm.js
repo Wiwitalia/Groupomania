@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import SignInForm from "./SignInForm";
 
+// Inscription
 const SignUpForm = () => {
   const [formSubmit, setFormSubmit] = useState(false);
   const [pseudo, setPseudo] = useState("");
@@ -23,7 +24,7 @@ const SignUpForm = () => {
     passwordConfirmError.innerHTML = "";
     termsError.innerHTML = "";
 
-    if (password !== controlPassword || !terms.checked) {
+    if (password !== controlPassword || !terms.checked) { // Si password n'est pas egal a controlPassword ou bien que terms n'est pas checked alors on renvoie une erreur
       if (password !== controlPassword)
         passwordConfirmError.innerHTML =
           "Les mots de passe ne correspondent pas";
@@ -72,7 +73,7 @@ const SignUpForm = () => {
             type="text"
             name="pseudo"
             id="pseudo"
-            onChange={(e) => setPseudo(e.target.value)}
+            onChange={(e) => setPseudo(e.target.value)}  // On recupere les changements dans l'evenement
             value={pseudo}
           />
           <div className="pseudo error"></div>
@@ -83,7 +84,7 @@ const SignUpForm = () => {
             type="text"
             name="email"
             id="email"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}  // On recupere les changements dans l'evenement
             value={email}
           />
           <div className="email error"></div>
@@ -94,7 +95,7 @@ const SignUpForm = () => {
             type="password"
             name="password"
             id="password"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}  // On recupere les changements dans l'evenement
             value={password}
           />
           <div className="password error"></div>
@@ -105,7 +106,7 @@ const SignUpForm = () => {
             type="password"
             name="password"
             id="password-conf"
-            onChange={(e) => setControlPassword(e.target.value)}
+            onChange={(e) => setControlPassword(e.target.value)}  // On recupere les changements dans l'evenement
             value={controlPassword}
           />
           <div className="password-confirm error"></div>
