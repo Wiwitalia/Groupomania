@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema(
       minLength: 3,
       maxLength: 55,
       unique: true,
-      trim: true   // suppression des éspaces
+      trim: true   // suppression des espaces
     },
     email: {
       type: String,
@@ -40,12 +40,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       max: 1024,
     },
-    followers: {
-      type: [String]
-    },
-    following: {
-      type: [String]
-    },
+    
     likes: {
       type: [String]
     }
