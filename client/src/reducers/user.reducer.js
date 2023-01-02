@@ -1,7 +1,6 @@
 import {
-  FOLLOW_USER,
+  
   GET_USER,
-  UNFOLLOW_USER,
   UPDATE_BIO,
   UPLOAD_PICTURE,
 } from "../actions/user.actions";
@@ -22,18 +21,7 @@ export default function userReducer(state = initialState, action) {
         ...state,
         bio: action.payload, // On met a jours les données dans la bio
       };
-    case FOLLOW_USER:
-      return {
-        ...state,
-        following: [action.payload.idToFollow, ...state.following],
-      };
-    case UNFOLLOW_USER:
-      return {
-        ...state,
-        following: state.following.filter(
-          (id) => id !== action.payload.idToUnfollow
-        ),
-      };
+    
     default:
       return state;
   }

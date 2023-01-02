@@ -10,9 +10,6 @@ export const UPDATE_POST = "UPDATE_POST";
 export const DELETE_POST = "DELETE_POST";
 
 
-// trends
-export const GET_TRENDS = "GET_TRENDS";
-
 // errors
 export const GET_POST_ERRORS = "GET_POST_ERRORS";
 
@@ -109,9 +106,3 @@ export const deletePost = (post, userData) => {
 
 
 
-
-export const getTrends = (sortedArray) => {
-  return (dispatch) => {
-    dispatch({ type: GET_TRENDS, payload: sortedArray });
-  };
-};
