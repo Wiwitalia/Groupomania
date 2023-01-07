@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const UserModel = require("../models/user.model");
 
 
-// Middleware pour verifier le token de l'utilisateur pour savoirsi on le  connnait 
+// Middleware pour verifier le token de l'utilisateur pour savoir si l'utilisateur est connecté 
 module.exports.checkUser = (req, res, next) => {
   const token = req.cookies.jwt;  
   if (token) {// Si on a un cookie jwt alors on le verifie

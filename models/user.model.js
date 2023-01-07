@@ -51,9 +51,9 @@ const userSchema = new mongoose.Schema(
 );
 
 // play function before save into display: 'block',
-userSchema.pre("save", async function(next) {
-  const salt = await bcrypt.genSalt();
-  this.password = await bcrypt.hash(this.password, salt);
+userSchema.pre("save", async function(next) { // Avant de faire des save dans la bdd, on crypte le mot de passe
+  const salt = await bcrypt.genSalt(); // bcrypt va generer une serie de caracteres que seul lui connait
+  this.password = await bcrypt.hash(this.password, salt); // On hash le mot depasse
   next();
 });
 

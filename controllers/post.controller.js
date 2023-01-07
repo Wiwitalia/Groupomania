@@ -11,7 +11,7 @@ const { Readable } = require('stream');
 // Récuperation de tous les posts
 module.exports.readPost = (req, res) => {
   PostModel.find((err, docs) => {
-    if (!err) res.send(docs); // Si il n'y a pas d'erreur on affiche les posts
+    if (!err) res.send(docs); // Si il n'y a pas d'erreur on envoie la docs (affiche les posts)
     else console.log("Error to get data : " + err);
   }).sort({ createdAt: -1 });  // Affichage des post du plus récent au plus ancien
 };
@@ -49,7 +49,6 @@ module.exports.createPost = async (req, res) => {
     picture: ( req.file !== null && req.file !== undefined ) ? process.env.CLIENT_URL + "/uploads/posts/" + fileName : "",
     video: req.body.video,
     likers: [],
-    comments: [],
   });
 
   try {
@@ -66,20 +65,20 @@ module.exports.updatePost = (req, res) => {
   if (req.body.post.posterId !== req.body.userData._id && req.body.userData.admin === false) { // On verifie si c'est bien la personne qui a postée et si l'utilisateur est admin
     return res.status(400).send("User is not admin : " );
   }
-  if (!ObjectID.isValid(req.params.id))
+  if (!ObjectID.isValid(req.params.id)) // On controlle si l'id est bon
    return res.status(400).send("ID unknown : " + req.params.id);
 
-  const updatedRecord = {
-    message: req.body.message,
+  const updatedRecord = { // Enregistrement de la mise a jour
+    message: req.body.message, 
   };
 
   PostModel.findByIdAndUpdate(
     req.params.id,
-    { $set: updatedRecord },
+    { $set: updatedRecord }, // Mise a jour du message
     { new: true },
     (err, docs) => {
-      if (!err) res.send(docs);
-      else console.log("Update error : " + err);
+      if (!err) res.send(docs); // Si il n'y a pas d'erreur on envoie la docs
+      else console.log("Update error : " + err); // Sinon erreur
     }
   );
 };
@@ -88,7 +87,7 @@ module.exports.deletePost = (req, res) => {
   if (req.body.post.posterId !== req.body.userData._id && req.body.userData.admin === false) {
     return res.status(400).send("User is not admin : " );
   } 
-  if (!ObjectID.isValid(req.params.id))
+  if (!ObjectID.isValid(req.params.id)) // // On controlle si l'id est bon
     return res.status(400).send("ID unknown : " + req.params.id);
 
   PostModel.findByIdAndRemove(req.params.id, (err, docs) => {
